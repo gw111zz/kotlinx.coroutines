@@ -67,7 +67,7 @@ public suspend inline fun <R> select(crossinline builder: SelectBuilder<R>.() ->
 /**
  * Scope for [select] invocation.
  */
-public interface SelectBuilder<in R> {
+public sealed interface SelectBuilder<in R> {
     /**
      * Registers a clause in this [select] expression without additional parameters that does not select any value.
      */
@@ -159,7 +159,8 @@ public typealias OnCancellationConstructor = (select: SelectInstance<*>, param: 
 /**
  * Clause for [select] expression without additional parameters that does not select any value.
  */
-public interface SelectClause0 : SelectClause
+public sealed interface SelectClause0 : SelectClause
+
 internal class SelectClause0Impl(
     override val clauseObject: Any,
     override val regFunc: RegistrationFunction,
@@ -173,7 +174,8 @@ private val DUMMY_PROCESS_RESULT_FUNCTION: ProcessResultFunction = { _, _, _ -> 
 /**
  * Clause for [select] expression without additional parameters that selects value of type [Q].
  */
-public interface SelectClause1<out Q> : SelectClause
+public sealed interface SelectClause1<out Q> : SelectClause
+
 internal class SelectClause1Impl<Q>(
     override val clauseObject: Any,
     override val regFunc: RegistrationFunction,
@@ -184,7 +186,8 @@ internal class SelectClause1Impl<Q>(
 /**
  * Clause for [select] expression with additional parameter of type [P] that selects value of type [Q].
  */
-public interface SelectClause2<in P, out Q> : SelectClause
+public sealed interface SelectClause2<in P, out Q> : SelectClause
+
 internal class SelectClause2Impl<P, Q>(
     override val clauseObject: Any,
     override val regFunc: RegistrationFunction,
