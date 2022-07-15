@@ -241,7 +241,7 @@ internal class ArrayBroadcastChannel<E>(
                     // find a receiver for an element
                     receive = takeFirstReceiveOrPeekClosed() ?: break // break when no one's receiving
                     if (receive is Closed<*>) break // noting more to do if this sub already closed
-                    val token = receive.tryResumeReceive(result as E, null) ?: continue
+                    val token = receive.tryResumeReceive(result as E) ?: continue
                     assert { token === RESUME_TOKEN }
                     val subHead = this.subHead
                     this.subHead = subHead + 1 // retrieved element for this subscriber

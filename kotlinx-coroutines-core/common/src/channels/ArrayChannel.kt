@@ -68,7 +68,7 @@ internal open class ArrayChannel<E>(
                         this.size.value = size // restore size
                         return receive!!
                     }
-                    val token = receive!!.tryResumeReceive(element, null)
+                    val token = receive!!.tryResumeReceive(element)
                     if (token != null) {
                         assert { token === RESUME_TOKEN }
                         this.size.value = size // restore size

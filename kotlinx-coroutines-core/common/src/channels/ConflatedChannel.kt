@@ -41,7 +41,7 @@ internal open class ConflatedChannel<E>(onUndeliveredElement: OnUndeliveredEleme
                     if (receive is Closed) {
                         return receive!!
                     }
-                    val token = receive!!.tryResumeReceive(element, null)
+                    val token = receive!!.tryResumeReceive(element)
                     if (token != null) {
                         assert { token === RESUME_TOKEN }
                         return@withLock
