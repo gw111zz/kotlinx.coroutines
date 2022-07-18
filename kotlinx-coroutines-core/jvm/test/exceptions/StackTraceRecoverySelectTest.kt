@@ -61,8 +61,6 @@ class StackTraceRecoverySelectTest : TestBase() {
     }
 
     private suspend fun doSelectOnReceive(c: Channel<Unit>) {
-        // Hide the stacktrace
-        yield()
         // The channel is closed, should throw an exception
         select<Unit> {
             c.onReceive {
