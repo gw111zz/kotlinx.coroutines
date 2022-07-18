@@ -179,7 +179,7 @@ internal abstract class AbstractSendChannel<E>(
     }
 
     // waiter is either CancellableContinuation or SelectInstance
-    internal fun sendSlowPath(element: E, waiter: Any) {
+    private fun sendSlowPath(element: E, waiter: Any) {
         loop@ while (true) {
             if (isFullImpl) {
                 val send: Send = if (waiter is SelectInstance<*>) {

@@ -1,7 +1,8 @@
 kotlinx.coroutines.RecoverableTestException
 	(Coroutine boundary)
-	at kotlinx.coroutines.selects.SelectImplementation$ClauseData.invokeBlock(Select.kt)
-	at kotlinx.coroutines.selects.SelectImplementation$ClauseData$invokeBlock$1.invokeSuspend(Select.kt)
+	at kotlinx.coroutines.selects.SelectImplementation.invokeBlockRecoveringException(Select.kt)
+	at kotlinx.coroutines.selects.SelectImplementation.access$invokeBlockRecoveringException(Select.kt)
+	at kotlinx.coroutines.selects.SelectImplementation$invokeBlockRecoveringException$1.invokeSuspend(Select.kt)
 Caused by: kotlinx.coroutines.RecoverableTestException
 	at kotlinx.coroutines.exceptions.StackTraceRecoverySelectTest$doSelect$2$1.invokeSuspend(StackTraceRecoverySelectTest.kt)
 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt)

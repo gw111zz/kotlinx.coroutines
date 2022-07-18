@@ -14,7 +14,6 @@ class StackTraceRecoverySelectTest : TestBase() {
     @get:Rule
     val name = TestName()
 
-    @Ignore // does not work with the recently integrated `select` algorithm
     @Test
     fun testSelectJoin() = runTest {
         expect(1)
