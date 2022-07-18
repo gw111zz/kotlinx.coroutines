@@ -751,11 +751,7 @@ internal open class SelectImplementation<R> constructor(
          * (e.g., when the channel is closed in [Channel.onSend], the
          * corresponding [ProcessResultFunction] is bound to fail).
          */
-        fun processResult(result: Any?) = try {
-            processResFunc(clauseObject, param, result)
-        } catch (e: Throwable) {
-            throw recoverStackTrace(e)
-        }
+        fun processResult(result: Any?) = processResFunc(clauseObject, param, result)
 
         /**
          * Invokes the user-specified block and returns
