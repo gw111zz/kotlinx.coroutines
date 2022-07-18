@@ -593,6 +593,7 @@ public abstract interface class kotlinx/coroutines/channels/ActorScope : kotlinx
 
 public final class kotlinx/coroutines/channels/ActorScope$DefaultImpls {
 	public static synthetic fun cancel (Lkotlinx/coroutines/channels/ActorScope;)V
+	public static fun getOnReceiveOrNull (Lkotlinx/coroutines/channels/ActorScope;)Lkotlinx/coroutines/selects/SelectClause1;
 	public static fun poll (Lkotlinx/coroutines/channels/ActorScope;)Ljava/lang/Object;
 	public static fun receiveOrNull (Lkotlinx/coroutines/channels/ActorScope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
@@ -639,6 +640,7 @@ public abstract interface class kotlinx/coroutines/channels/Channel : kotlinx/co
 
 public final class kotlinx/coroutines/channels/Channel$DefaultImpls {
 	public static synthetic fun cancel (Lkotlinx/coroutines/channels/Channel;)V
+	public static fun getOnReceiveOrNull (Lkotlinx/coroutines/channels/Channel;)Lkotlinx/coroutines/selects/SelectClause1;
 	public static fun offer (Lkotlinx/coroutines/channels/Channel;Ljava/lang/Object;)Z
 	public static fun poll (Lkotlinx/coroutines/channels/Channel;)Ljava/lang/Object;
 	public static fun receiveOrNull (Lkotlinx/coroutines/channels/Channel;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
@@ -835,6 +837,7 @@ public final class kotlinx/coroutines/channels/ReceiveChannel$DefaultImpls {
 	public static synthetic fun cancel (Lkotlinx/coroutines/channels/ReceiveChannel;)V
 	public static synthetic fun cancel$default (Lkotlinx/coroutines/channels/ReceiveChannel;Ljava/lang/Throwable;ILjava/lang/Object;)Z
 	public static synthetic fun cancel$default (Lkotlinx/coroutines/channels/ReceiveChannel;Ljava/util/concurrent/CancellationException;ILjava/lang/Object;)V
+	public static fun getOnReceiveOrNull (Lkotlinx/coroutines/channels/ReceiveChannel;)Lkotlinx/coroutines/selects/SelectClause1;
 	public static fun poll (Lkotlinx/coroutines/channels/ReceiveChannel;)Ljava/lang/Object;
 	public static fun receiveOrNull (Lkotlinx/coroutines/channels/ReceiveChannel;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }

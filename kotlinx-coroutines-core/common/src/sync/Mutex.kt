@@ -245,7 +245,7 @@ internal open class MutexImpl(locked: Boolean) : SemaphoreImpl(1, if (locked) 1 
         val select: SelectInstance<Q>,
         @JvmField
         val owner: Any?
-    ) : SelectInstance<Q> by select {
+    ) : SelectInstanceInternal<Q> by select as SelectInstanceInternal<Q> {
         override fun trySelect(clauseObject: Any, result: Any?): Boolean {
             assert { this@MutexImpl.owner.value === NO_OWNER }
             this@MutexImpl.owner.value = owner

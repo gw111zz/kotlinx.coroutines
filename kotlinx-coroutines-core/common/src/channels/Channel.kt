@@ -365,7 +365,7 @@ public interface ReceiveChannel<out E> {
         level = DeprecationLevel.ERROR,
         replaceWith = ReplaceWith("onReceiveCatching")
     ) // Warning since 1.3.0, error in 1.5.0, will be hidden or removed in 1.7.0
-    public val onReceiveOrNull: SelectClause1<E?>
+    public val onReceiveOrNull: SelectClause1<E?> get() = (this as AbstractChannel<E>).onReceiveOrNull
 }
 
 /**

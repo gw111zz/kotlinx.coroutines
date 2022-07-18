@@ -201,7 +201,7 @@ internal class SelectClause2Impl<P, Q>(
  * @suppress **This is unstable API, and it is subject to change.**
  */
 @InternalCoroutinesApi // todo: sealed interface https://youtrack.jetbrains.com/issue/KT-22286
-public interface SelectInstance<in R> {
+public sealed interface SelectInstance<in R> {
     /**
      * The context of the coroutine that is performing this `select` operation.
      */
@@ -232,11 +232,12 @@ public interface SelectInstance<in R> {
      */
     public fun selectInRegistrationPhase(internalResult: Any?)
 }
+internal interface SelectInstanceInternal<R>: SelectInstance<R>
 
 @PublishedApi
 internal open class SelectImplementation<R> constructor(
     override val context: CoroutineContext
-) : CancelHandler(), SelectBuilder<R>, SelectInstance<R> {
+) : CancelHandler(), SelectBuilder<R>, SelectInstanceInternal<R> {
 
     /**
      * Essentially, the `select` operation is split into three phases: REGISTRATION, WAITING, and COMPLETION.
@@ -644,11 +645,11 @@ internal open class SelectImplementation<R> constructor(
         // of memory leaks. Collect the internal result before that.
         val internalResult = this.internalResult
         cleanup(selectedClause)
-        // Process the internal result.
-        val blockArgument = selectedClause.processResult(internalResult)
+        // Process the internal result and invoke the user's block.
         return if (!RECOVER_STACK_TRACES) {
             // TAIL-CALL OPTIMIZATION: the `suspend` block
             // is invoked at the very end.
+            val blockArgument = selectedClause.processResult(internalResult)
             selectedClause.invokeBlock(blockArgument)
         } else {
             // TAIL-CALL OPTIMIZATION: the `suspend`
@@ -656,18 +657,19 @@ internal open class SelectImplementation<R> constructor(
             // However, internally this `suspend` function
             // constructs a state machine to recover a
             // possible stack-trace.
-            selectedClause.invokeBlockRecoveringException(blockArgument)
+            processResultAndInvokeBlockRecoveringException(selectedClause, internalResult)
         }
     }
 
-    private suspend fun ClauseData<R>.invokeBlockRecoveringException(blockArgument: Any?): R =
+    private suspend fun processResultAndInvokeBlockRecoveringException(clause: ClauseData<R>, internalResult: Any?): R =
         try {
-            // In the debug mode, we need to recover
-            // the stack-trace of possible exception.
-            // Thus, the tail-call optimization cannot be applied.
-            invokeBlock(blockArgument)
+            val blockArgument = clause.processResult(internalResult)
+            clause.invokeBlock(blockArgument)
         } catch (e: Throwable) {
-            throw recoverStackTrace(e)
+            // In the debug mode, we need to properly recover
+            // the stack-trace of the exception; the tail-call
+            // optimization cannot be applied here.
+            recoverAndThrow(e)
         }
 
     /**
