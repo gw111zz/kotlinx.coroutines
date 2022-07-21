@@ -1232,7 +1232,7 @@ public abstract interface class kotlinx/coroutines/selects/SelectClause1 : kotli
 public abstract interface class kotlinx/coroutines/selects/SelectClause2 : kotlinx/coroutines/selects/SelectClause {
 }
 
-public class kotlinx/coroutines/selects/SelectImplementation : kotlinx/coroutines/selects/SelectBuilder, kotlinx/coroutines/selects/SelectInstance {
+public class kotlinx/coroutines/selects/SelectImplementation : kotlinx/coroutines/selects/SelectBuilder, kotlinx/coroutines/selects/SelectInstanceInternal {
 	public fun <init> (Lkotlin/coroutines/CoroutineContext;)V
 	public fun disposeOnCompletion (Lkotlinx/coroutines/DisposableHandle;)V
 	public fun doSelect (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
