@@ -84,7 +84,23 @@ internal class UnbiasedSelectBuilderImpl<R>(
     }
 }
 
-// This is the old version of `select`. It should work to guarantee binary compatibility.
+/*
+ * This is the old version of `select`. It should work to guarantee binary compatibility.
+ *
+ * Internal note:
+ * We do test it manually by changing the implementation of **new** select with the following:
+ * ```
+ * public suspend inline fun <R> select(crossinline builder: SelectBuilder<R>.() -> Unit): R {
+ *     contract {
+ *         callsInPlace(builder, InvocationKind.EXACTLY_ONCE)
+ *     }
+ *     return selectOld(builder)
+ * }
+ * ```
+ *
+ * These signatures are not used by the already compiled code, but their body is.
+ */
+@PublishedApi
 internal suspend inline fun <R> selectOld(crossinline builder: SelectBuilder<R>.() -> Unit): R {
     return suspendCoroutineUninterceptedOrReturn { uCont ->
         val scope = SelectBuilderImpl(uCont)
@@ -98,6 +114,7 @@ internal suspend inline fun <R> selectOld(crossinline builder: SelectBuilder<R>.
 }
 
 // This is the old version of `selectUnbiased`. It should work to guarantee binary compatibility.
+@PublishedApi
 internal suspend inline fun <R> selectUnbiasedOld(crossinline builder: SelectBuilder<R>.() -> Unit): R =
     suspendCoroutineUninterceptedOrReturn { uCont ->
         val scope = UnbiasedSelectBuilderImpl(uCont)
