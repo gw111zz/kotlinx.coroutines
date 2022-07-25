@@ -66,6 +66,14 @@ public suspend inline fun <R> select(crossinline builder: SelectBuilder<R>.() ->
 
 /**
  * Scope for [select] invocation.
+ *
+ * An instance of [SelectBuilder] can only be retrieved as a receiver of a [select] block call,
+ * and it is only valid during the registration phase of the select builder.
+ * Any uses outside it lead to unspecified behaviour and are prohibited.
+ *
+ * The general rule of thumb is that instances of this type should always be used
+ * implicitly and there shouldn't be any signatures mentioning this type,
+ * whether explicitly (e.g. function signature) or implicitly (e.g. inferred `val` type).
  */
 public sealed interface SelectBuilder<in R> {
     /**
@@ -200,7 +208,7 @@ internal class SelectClause2Impl<P, Q>(
  *
  * @suppress **This is unstable API, and it is subject to change.**
  */
-@InternalCoroutinesApi // todo: sealed interface https://youtrack.jetbrains.com/issue/KT-22286
+@InternalCoroutinesApi
 public sealed interface SelectInstance<in R> {
     /**
      * The context of the coroutine that is performing this `select` operation.
