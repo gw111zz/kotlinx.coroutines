@@ -441,7 +441,8 @@ internal open class SelectImplementation<R> constructor(
      * provided via [selectInRegistrationPhase] -- the algorithm
      * updates the state to this clause reference.
      */
-    protected fun ClauseData<R>.register(reregister: Boolean = false) {
+    @JvmName("register")
+    internal fun ClauseData<R>.register(reregister: Boolean = false) {
         assert { state.value !== STATE_CANCELLED }
         // Is there already selected clause?
         if (state.value.let { it is ClauseData<*> }) return
@@ -714,7 +715,7 @@ internal open class SelectImplementation<R> constructor(
     /**
      * Each `select` clause is internally represented with a [ClauseData] instance.
       */
-    protected class ClauseData<R>(
+    internal class ClauseData<R>(
         @JvmField val clauseObject: Any, // the object of this `select` clause: Channel, Mutex, Job, ...
         private val regFunc: RegistrationFunction,
         private val processResFunc: ProcessResultFunction,

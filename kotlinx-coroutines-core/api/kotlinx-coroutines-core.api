@@ -1244,23 +1244,9 @@ public class kotlinx/coroutines/selects/SelectImplementation : kotlinx/coroutine
 	public fun invoke (Lkotlinx/coroutines/selects/SelectClause2;Ljava/lang/Object;Lkotlin/jvm/functions/Function2;)V
 	public fun invoke (Lkotlinx/coroutines/selects/SelectClause2;Lkotlin/jvm/functions/Function2;)V
 	public fun onTimeout (JLkotlin/jvm/functions/Function1;)V
-	protected final fun register (Lkotlinx/coroutines/selects/SelectImplementation$ClauseData;Z)V
-	public static synthetic fun register$default (Lkotlinx/coroutines/selects/SelectImplementation;Lkotlinx/coroutines/selects/SelectImplementation$ClauseData;ZILjava/lang/Object;)V
 	public fun selectInRegistrationPhase (Ljava/lang/Object;)V
 	public fun trySelect (Ljava/lang/Object;Ljava/lang/Object;)Z
 	public final fun trySelectDetailed (Ljava/lang/Object;Ljava/lang/Object;)Lkotlinx/coroutines/selects/TrySelectDetailedResult;
-}
-
-protected final class kotlinx/coroutines/selects/SelectImplementation$ClauseData {
-	public final field clauseObject Ljava/lang/Object;
-	public field disposableHandle Lkotlinx/coroutines/DisposableHandle;
-	public final field onCancellationConstructor Lkotlin/jvm/functions/Function3;
-	public fun <init> (Ljava/lang/Object;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Ljava/lang/Object;Ljava/lang/Object;Lkotlin/jvm/functions/Function3;Lkotlinx/coroutines/DisposableHandle;)V
-	public synthetic fun <init> (Ljava/lang/Object;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Ljava/lang/Object;Ljava/lang/Object;Lkotlin/jvm/functions/Function3;Lkotlinx/coroutines/DisposableHandle;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun createOnCancellationAction (Lkotlinx/coroutines/selects/SelectInstance;Ljava/lang/Object;)Lkotlin/jvm/functions/Function1;
-	public final fun invokeBlock (Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public final fun processResult (Ljava/lang/Object;)Ljava/lang/Object;
-	public final fun tryRegisterAsWaiter (Lkotlinx/coroutines/selects/SelectImplementation;)Z
 }
 
 public abstract interface class kotlinx/coroutines/selects/SelectInstance {
